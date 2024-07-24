@@ -25,7 +25,7 @@ printf " \n"
 printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
-printf "\033[0;33m    Num of sub-folders: 3 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -41,4 +41,6 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     sh push_all_for_backup.sh "$1"
 done
 
+printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
+printf " \n"
 cd $cur_dir

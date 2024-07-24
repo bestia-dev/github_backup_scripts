@@ -33,5 +33,5 @@ done
 
 cd $cur_dir/
 
-printf "\033[0;33m    Num of repositories should be: 56 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 57 \033[0m\n"
 printf " \n"

@@ -15,7 +15,7 @@ printf " \n"
 printf "\033[0;33m    Script to pull (fetch+merge) all the changes from GitHub into local folder \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This makes a backup of the GitHub repo. This local folder is then synced automatically to DropBox. \033[0m\n"
-printf "\033[0;33m    Num of sub-folders: 3 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -32,4 +32,6 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     sh pull_all_for_backup.sh
 done
 
+printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
+printf " \n"
 cd $cur_dir/

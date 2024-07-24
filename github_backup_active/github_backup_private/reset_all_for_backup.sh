@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup_active/reset_all_for_backup.sh
+# r/d/Dropbox/BestiaDev/github_backup_active/github_backup_private/eset_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup_active"
+cur_dir="/d/Dropbox/BestiaDev/github_backup_active/github_backup_private"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -14,8 +14,8 @@ fi
 printf " \n"
 printf "\033[0;33m    Script to reset and pull all the changes from GitHub to local folder \033[0m\n"
 printf " $cur_dir \n"
+printf "\033[0;33m    This way it is 100% sure, the local backup is the same as the GitHub repo. \033[0m\n"
 printf "\033[0;33m    WARNING: all changed files in the local folder will be undone. \033[0m\n"
-printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -24,14 +24,15 @@ COUNTER=1
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
-    printf " $COUNTER. subfolder"
-    pwd
+    printf " $COUNTER. "
     COUNTER=$(expr $COUNTER + 1)
 
-    sh reset_all_for_backup.sh
+    pwd
+    git reset --hard HEAD 
+    git pull
 done
 
-printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
-printf " \n"
-
 cd $cur_dir/
+
+printf "\033[0;33m    Num of repositories should be: 2 \033[0m\n"
+printf " \n"
