@@ -25,7 +25,7 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     printf " $COUNTER. "
-    COUNTER=$(expr $COUNTER + 1)
+    COUNTER=$((COUNTER+1))
 
     pwd
     git reset --hard HEAD 

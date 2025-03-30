@@ -30,7 +30,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     git merge &>> "temp$COUNTER.txt" 
     printf "."
     )&
-    COUNTER=$(expr $COUNTER + 1)
+    COUNTER=$((COUNTER+1))
 done
 wait
 printf "\n"
@@ -41,7 +41,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     cat "temp$COUNTER.txt"
     rm "temp$COUNTER.txt"
-    COUNTER=$(expr $COUNTER + 1)
+    COUNTER=$((COUNTER+1))
 done
 
 cd $cur_dir/

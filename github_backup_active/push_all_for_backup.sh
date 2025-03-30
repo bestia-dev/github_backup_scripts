@@ -36,7 +36,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     printf " $COUNTER. subfolder "
     pwd
-    COUNTER=$(expr $COUNTER + 1)
+    COUNTER=$((COUNTER+1))
 
     sh push_all_for_backup.sh "$1"
 done

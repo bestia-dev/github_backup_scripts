@@ -27,7 +27,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     printf "\n"
     printf " $COUNTER. subfolder "
     pwd
-    COUNTER=$(expr $COUNTER + 1)
+    COUNTER=$((COUNTER+1))
 
     sh pull_all_for_backup.sh
 done
