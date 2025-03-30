@@ -15,7 +15,7 @@ printf " \n"
 printf "\033[0;33m    Script to reset and pull all the changes from GitHub to local folder \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    WARNING: all changed files in the local folder will be undone. \033[0m\n"
-printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 5 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -26,12 +26,12 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     printf " $COUNTER. subfolder"
     pwd
-    COUNTER=$((COUNTER+1))
+    COUNTER=$((COUNTER+1))  
 
     sh reset_all_for_backup.sh
 done
 
-printf "\033[0;33m    Num of sub-folders: 4 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 5 \033[0m\n"
 printf " \n"
 
 cd $cur_dir/

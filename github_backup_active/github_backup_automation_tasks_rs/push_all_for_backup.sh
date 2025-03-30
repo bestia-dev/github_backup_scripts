@@ -36,12 +36,13 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     (cd $folder
     printf " $COUNTER. $folder \n" &> "temp$COUNTER.txt" 
     printf "."
-    git add . &>> "temp$COUNTER.txt"  
-    git commit -a -m "$1" &>> "temp$COUNTER.txt"  
-    git push &>> "temp$COUNTER.txt"  
+    mkdir -p tmp
+    git add . &>> "tmp/temp$COUNTER.txt"  
+    git commit -a -m "$1" &>> "tmp/temp$COUNTER.txt"  
+    git push &>> "tmp/temp$COUNTER.txt"  
     printf "."
     )&
-    COUNTER=$((COUNTER+1))
+    COUNTER=$((COUNTER+1))  
 done
 wait
 printf "\n"
@@ -50,9 +51,9 @@ cd $cur_dir/
 COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
-    cat "temp$COUNTER.txt"
-    rm "temp$COUNTER.txt"
-    COUNTER=$((COUNTER+1))
+    cat "tmp/temp$COUNTER.txt"
+    rm "tmp/temp$COUNTER.txt"
+    COUNTER=$((COUNTER+1))  
 done
 
 cd $cur_dir/
