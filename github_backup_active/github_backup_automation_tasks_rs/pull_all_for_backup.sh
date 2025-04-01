@@ -41,7 +41,7 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     cat "tmp/temp$COUNTER.txt"
-    rm "tmp/temp$COUNTER.txt"
+    rm -rf "tmp"
     COUNTER=$((COUNTER+1))  
 done
 

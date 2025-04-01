@@ -34,6 +34,7 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     # parallelism with ()& confuses the output. I want to print correctly in sequence.
     (cd $folder
+    mkdir -p tmp
     printf " $COUNTER. $folder \n" &> "tmp/temp$COUNTER.txt" 
     printf "."
     mkdir -p tmp
@@ -52,7 +53,7 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
     cat "tmp/temp$COUNTER.txt"
-    rm "tmp/temp$COUNTER.txt"
+    rm -rf "tmp"
     COUNTER=$((COUNTER+1))  
 done
 
