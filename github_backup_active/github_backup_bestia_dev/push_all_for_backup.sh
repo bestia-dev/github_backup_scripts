@@ -35,13 +35,13 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     # parallelism with ()& confuses the output. I want to print correctly in sequence.
     (cd $folder
     mkdir -p tmp
-    printf " $COUNTER. $folder \n" &> "tmp/temp$COUNTER.txt" 
+    printf " $COUNTER. $folder \n" &> "/tmp/push$COUNTER.txt" 
     printf "."
     mkdir -p tmp
-    git add . &>> "tmp/temp$COUNTER.txt"  
-    git commit -a -m "$1" &>> "tmp/temp$COUNTER.txt"  
-    git push &>> "tmp/temp$COUNTER.txt"  
-    printf "."
+    git add . &>> "/tmp/push$COUNTER.txt"  
+    git commit -a -m "$1" &>> "/tmp/push$COUNTER.txt"  
+    git push &>> "/tmp/push$COUNTER.txt"  
+    printf ">"
     )&
     COUNTER=$((COUNTER+1))  
 done
@@ -51,9 +51,8 @@ cd $cur_dir/
 
 COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    cd $folder
-    cat "tmp/temp$COUNTER.txt"
-    rm -rf "tmp"
+    tail "/tmp/push$COUNTER.txt"
+    rm f "/tmp/push$COUNTER.txt"
     COUNTER=$((COUNTER+1))  
 done
 
