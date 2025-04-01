@@ -30,6 +30,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     COUNTER=$((COUNTER+1))  
 
     sh pull_all_for_backup.sh
+    
 done
 
 printf "\033[0;33m    Num of sub-folders: 5 \033[0m\n"
