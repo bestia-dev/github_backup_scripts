@@ -28,7 +28,7 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     printf "."
     git fetch --all &>> "/tmp/pull$COUNTER.txt"  
     git merge &>> "/tmp/pull$COUNTER.txt" 
-    printf ">"
+    printf "."
     )&
     COUNTER=$((COUNTER+1))  
 done
