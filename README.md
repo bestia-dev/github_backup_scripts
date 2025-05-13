@@ -31,7 +31,7 @@ My GitHub backup folders are in my DropBox folder:
 `d:\Dropbox\BestiaDev\github_backup_active\` and  
 `d:\Dropbox\BestiaDev\github_backup_archived\`  
 
-This way they got synchronized to my DropBox automatically. To be sure I also make a backup of the DropBox folder to my 2 external disks eventually.
+This way they got synchronized to my DropBox automatically. To be sure I also make a backup of the DropBox folder to my 2 external disks regularly.
 
 ## git-bash scripts
 
