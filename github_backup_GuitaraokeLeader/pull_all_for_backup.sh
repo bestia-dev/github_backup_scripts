@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup_archived/pull_all_for_backup.sh
+# /d/Dropbox/BestiaDev/github_backup_GuitaraokeLeader/pull_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup_archived"
+cur_dir="/d/Dropbox/BestiaDev/github_backup_GuitaraokeLeader"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -22,16 +22,30 @@ COUNTER=1
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    cd $folder
-    printf " $COUNTER. "
-    COUNTER=$(expr $COUNTER + 1)
+    # parallelism with ()& confuses the output. I want to print correctly in sequence.
+    (cd $folder
+    mkdir -p tmp
+    printf " $COUNTER. $folder \n" &> "tmp/temp$COUNTER.txt" 
+    printf "."
+    git fetch --all &>> "tmp/temp$COUNTER.txt"  
+    git merge &>> "tmp/temp$COUNTER.txt" 
+    printf "."
+    )&
+    COUNTER=$((COUNTER+1))  
+done
+wait
+printf "\n"
+cd $cur_dir/
 
-    pwd
-    git fetch --all
-    git merge
+COUNTER=1
+for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
+    cd $folder
+    cat "tmp/temp$COUNTER.txt"
+    rm "tmp/temp$COUNTER.txt"
+    COUNTER=$((COUNTER+1))  
 done
 
 cd $cur_dir/
 
-printf "\033[0;33m    Num of repositories should be: 32 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 1 \033[0m\n"
 printf " \n"
