@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup_active/github_backup_bestia_dev/reset_all_for_backup.sh
+# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_bestia_dev/reset_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup_active/github_backup_bestia_dev"
+cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_bestia_dev"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -34,5 +34,5 @@ done
 
 cd $cur_dir/
 
-printf "\033[0;33m    Num of repositories should be: 57 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 51 \033[0m\n"
 printf " \n"

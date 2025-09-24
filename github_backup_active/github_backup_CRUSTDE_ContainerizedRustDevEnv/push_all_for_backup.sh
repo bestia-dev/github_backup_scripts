@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup_active/github_backup_CRUSTDE_ContainerizedRustDevEnv/push_all_for_backup.sh
+# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_CRUSTDE_ContainerizedRustDevEnv/push_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup_active/github_backup_CRUSTDE_ContainerizedRustDevEnv"
+cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_CRUSTDE_ContainerizedRustDevEnv"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -55,5 +55,5 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
 done
 
 cd $cur_dir/
-printf "\033[0;33m    Num of repositories should be: 10 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 9 \033[0m\n"
 printf " \n"
