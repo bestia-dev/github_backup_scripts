@@ -49,7 +49,7 @@ cd $cur_dir/
 
 COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    tail "/tmp/push$COUNTER.txt"
+    cat "/tmp/push$COUNTER.txt"
     rm -f "/tmp/push$COUNTER.txt"
     COUNTER=$((COUNTER+1))  
 done

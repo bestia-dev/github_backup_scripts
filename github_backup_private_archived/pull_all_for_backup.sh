@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_private/pull_all_for_backup.sh
+# /d/Dropbox/BestiaDev/github_backup/github_backup_private_archived/pull_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_private"
+cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_private_archived"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -24,10 +24,11 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     # parallelism with ()& confuses the output. I want to print correctly in sequence.
     (cd $folder
-    printf " $COUNTER. $folder \n" &> "/tmp/pull$COUNTER.txt" 
+    mkdir -p tmp
+    printf " $COUNTER. $folder \n" &> "tmp/temp$COUNTER.txt" 
     printf "."
-    git fetch --all &>> "/tmp/pull$COUNTER.txt"  
-    git merge &>> "/tmp/pull$COUNTER.txt" 
+    git fetch --all &>> "tmp/temp$COUNTER.txt"  
+    git merge &>> "tmp/temp$COUNTER.txt" 
     printf "."
     )&
     COUNTER=$((COUNTER+1))  
@@ -38,12 +39,13 @@ cd $cur_dir/
 
 COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    cat "/tmp/pull$COUNTER.txt"
-    rm "/tmp/pull$COUNTER.txt"
+    cd $folder
+    cat "tmp/temp$COUNTER.txt"
+    rm "tmp/temp$COUNTER.txt"
     COUNTER=$((COUNTER+1))  
 done
 
 cd $cur_dir/
 
-printf "\033[0;33m    Num of repositories should be: 3 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 4 \033[0m\n"
 printf " \n"

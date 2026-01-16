@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs/push_all_for_backup.sh
+# /d/Dropbox/BestiaDev/github_backup/github_backup_active/push_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs"
+cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -25,6 +25,7 @@ printf " \n"
 printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 6 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -32,28 +33,14 @@ COUNTER=1
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    # parallelism with ()& confuses the output. I want to print correctly in sequence.
-    (cd $folder
-    printf " $COUNTER. $folder \n" &> "/tmp/push$COUNTER.txt" 
-    printf "."
-    git add . &>> "/tmp/push$COUNTER.txt"  
-    git commit -a -m "$1" &>> "/tmp/push$COUNTER.txt"  
-    git push &>> "/tmp/push$COUNTER.txt"  
-    printf "."
-    )&
+    cd $folder
+    printf "\033[0;33m  $COUNTER. subfolder \033[0m\n"
+    pwd
     COUNTER=$((COUNTER+1))  
-done
-wait
-printf "\n"
-cd $cur_dir/
 
-COUNTER=1
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    cat "/tmp/push$COUNTER.txt"
-    rm -f "/tmp/push$COUNTER.txt"
-    COUNTER=$((COUNTER+1))  
+    sh push_all_for_backup.sh "$1"
 done
 
-cd $cur_dir/
-printf "\033[0;33m    Num of repositories should be: 9 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders: 6 \033[0m\n"
 printf " \n"
+cd $cur_dir
