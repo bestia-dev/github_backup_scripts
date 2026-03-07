@@ -1,21 +1,21 @@
-# r/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs/eset_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_bestia_dev/pull_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
   printf "\033[0;31m Error: Not in the right directory! \033[0m\n"
   printf "\033[0;33m    Usage: \033[0m\n"
   printf "\033[0;32m cd $cur_dir \033[0m\n"
-  printf "\033[0;32m sh reset_all_for_backup.sh \033[0m\n"
+  printf "\033[0;32m sh pull_all_for_backup.sh \033[0m\n"
   exit 1;
 fi
 
 printf " \n"
-printf "\033[0;33m    Script to reset and pull all the changes from GitHub to local folder \033[0m\n"
+printf "\033[0;33m    Script to pull (fetch+merge) all the changes from GitHub into local folder \033[0m\n"
 printf " $cur_dir \n"
-printf "\033[0;33m    This way it is 100% sure, the local backup is the same as the GitHub repo. \033[0m\n"
-printf "\033[0;33m    WARNING: all changed files in the local folder will be undone. \033[0m\n"
+printf "\033[0;33m    This makes a backup of the GitHub repo. This local folder is then synced automatically to DropBox. \033[0m\n"
+printf "\033[0;33m    Count of super-folders should be: 2 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -24,15 +24,15 @@ COUNTER=1
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     cd $folder
-    printf " $COUNTER. "
+    printf "\n"
+    printf "\033[0;33m  $COUNTER. superfolder \033[0m\n"
+    pwd
     COUNTER=$((COUNTER+1))  
 
-    pwd
-    git reset --hard HEAD 
-    git pull
+    sh pull_all_for_backup.sh
+    
 done
 
-cd $cur_dir/
-
-printf "\033[0;33m    Num of repositories should be: 9 \033[0m\n"
+printf "\033[0;33m    Count of super-folders should be: 2 \033[0m\n"
 printf " \n"
+cd $cur_dir/

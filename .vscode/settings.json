@@ -22,15 +22,16 @@
         "workbench.action.toggleSidebarVisibility",
     ],
     "cSpell.words": [
-        "zcvf",
-        "CRUSTDE",
         "Alla",
         "bestia",
         "bestiadev",
+        "codeberg",
         "crev",
+        "CRUSTDE",
         "debuginfo",
         "deps",
         "endregion",
+        "Guitaraoke",
         "Nazdravlje",
         "nbsp",
         "nofollow",
@@ -56,6 +57,7 @@
         "thiserror",
         "unoptimized",
         "Webassembly",
+        "zcvf",
         "zdravje"
     ]
 }

@@ -28,8 +28,8 @@ Sure I don't want to have all my eggs in one basket. I need to make a backup of 
 ## GitHub backup folders
 
 My GitHub backup folders are in my DropBox folder:  
-`d:\Dropbox\BestiaDev\github_backup_active\` and  
-`d:\Dropbox\BestiaDev\github_backup_archived\`  
+`d:\box_original_1\BestiaDev\github_backup_bestia_dev\` and  
+`d:\box_original_1\BestiaDev\github_backup_GuitaraokeLeader\`  
 
 This way they got synchronized to my DropBox automatically. To be sure I also make a backup of the DropBox folder to my 2 external disks regularly.
 
@@ -39,6 +39,9 @@ On Win10 I have installed `git` and with it comes `git-bash`. It is fantastic th
 
 In this repository, there are copies of these scripts in folders just like I have them in my DropBox folder.
 
+## Migration to codeberg.org 2026
+
+In 2026 I migrated most of my repositories away from GitHub to codeberg.org. But some repositories are ok to stay on GitHub.
 
 ## Open-source and free as a beer
 
@@ -50,6 +53,7 @@ So I can drink a free beer for your health :-)
 [Na zdravje!](https://translate.google.com/?hl=en&sl=sl&tl=en&text=Na%20zdravje&op=translate) [Alla salute!](https://dictionary.cambridge.org/dictionary/italian-english/alla-salute) [Prost!](https://dictionary.cambridge.org/dictionary/german-english/prost) [Nazdravlje!](https://matadornetwork.com/nights/how-to-say-cheers-in-50-languages/) 🍻
 
 [//bestia.dev](https://bestia.dev)  
+[//codeberg.org/bestia-dev](https://codeberg.org/bestia-dev)  
 [//github.com/bestia-dev](https://github.com/bestia-dev)  
 [//bestiadev.substack.com](https://bestiadev.substack.com)  
 [//youtube.com/@bestia-dev-tutorials](https://youtube.com/@bestia-dev-tutorials)  

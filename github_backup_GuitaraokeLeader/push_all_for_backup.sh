@@ -1,6 +1,6 @@
-# /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_GuitaraokeLeader/push_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_GuitaraokeLeader/push_all_for_backup.sh
 
-cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_GuitaraokeLeader"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_GuitaraokeLeader"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -57,5 +57,5 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
 done
 
 cd $cur_dir/
-printf "\033[0;33m    Num of repositories should be: 3 \033[0m\n"
+printf "\033[0;33m    Num of repositories should be: 4 \033[0m\n"
 printf " \n"
