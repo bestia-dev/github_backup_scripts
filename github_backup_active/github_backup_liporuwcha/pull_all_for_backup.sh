@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_liporuwcha/pull_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_liporuwcha/pull_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_liporuwcha"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_liporuwcha"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -14,7 +14,7 @@ fi
 printf " \n"
 printf "\033[0;33m    Script to pull (fetch+merge) all the changes from GitHub into local folder \033[0m\n"
 printf " $cur_dir \n"
-printf "\033[0;33m    This makes a backup of the GitHub repo. This local folder is then synced automatically to DropBox. \033[0m\n"
+printf "\033[0;33m    This makes a backup of the GitHub repo. This local folder is then synced automatically to Hetzner Storage Box. \033[0m\n"
 printf " \n"
 
 COUNTER=1

@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs/push_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_automation_tasks_rs/push_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active/github_backup_automation_tasks_rs"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_automation_tasks_rs"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then

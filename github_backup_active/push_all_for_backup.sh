@@ -1,6 +1,6 @@
-# /d/Dropbox/BestiaDev/github_backup/github_backup_active/push_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/push_all_for_backup.sh
 
-cur_dir="/d/Dropbox/BestiaDev/github_backup/github_backup_active"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
@@ -25,7 +25,7 @@ printf " \n"
 printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
-printf "\033[0;33m    Num of sub-folders: 6 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders should be: 6 \033[0m\n"
 printf " \n"
 
 COUNTER=1
@@ -41,6 +41,6 @@ for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
     sh push_all_for_backup.sh "$1"
 done
 
-printf "\033[0;33m    Num of sub-folders: 6 \033[0m\n"
+printf "\033[0;33m    Num of sub-folders should be: 6 \033[0m\n"
 printf " \n"
 cd $cur_dir
