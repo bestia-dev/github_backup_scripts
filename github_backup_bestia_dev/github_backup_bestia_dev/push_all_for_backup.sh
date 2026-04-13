@@ -1,28 +1,29 @@
 # /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_bestia_dev/push_all_for_backup.sh
+# formatted with v7.2.5 of https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
 
 cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_bestia_dev"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
-  printf "\033[0;31m Error: Not in the right directory! \033[0m\n"
-  printf "\033[0;33m    Usage: \033[0m\n"
-  printf "\033[0;32m cd $cur_dir \033[0m\n"
-  printf "\033[0;32m sh push_all_for_backup.sh \"commit message\" \033[0m\n"
-  exit 1;
+    printf "\033[0;31m Error: Not in the right directory! \033[0m\n"
+    printf "\033[0;33m    Usage: \033[0m\n"
+    printf "\033[0;32m cd $cur_dir \033[0m\n"
+    printf "\033[0;32m sh push_all_for_backup.sh \"commit message\" \033[0m\n"
+    exit 1
 fi
 
 # mandatory argument "message"
 if [ ! "$1" ]; then
-  printf "\033[0;31m Error: The argument \"commit message\" must be provided ! \033[0m\n"
-  printf "\033[0;33m    Usage: \033[0m\n"
-  printf "\033[0;32m sh push_all_for_backup.sh \"commit message\" \033[0m\n"
-  exit 1;
+    printf "\033[0;31m Error: The argument \"commit message\" must be provided ! \033[0m\n"
+    printf "\033[0;33m    Usage: \033[0m\n"
+    printf "\033[0;32m sh push_all_for_backup.sh \"commit message\" \033[0m\n"
+    exit 1
 fi
 
-printf "commit message: $1\n";
+printf "commit message: $1\n"
 
 printf " \n"
-printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
+printf "\033[0;33m    Script to status, add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
 printf " \n"
@@ -31,27 +32,40 @@ COUNTER=1
 # Loop through hidden and not hidden directories is not trivial
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
+for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
     # parallelism with ()& confuses the output. I want to print correctly in sequence.
-    (cd $folder
-    printf " $COUNTER. $folder \n" &> "/tmp/push$COUNTER.txt" 
-    printf "."
-    git add . &>> "/tmp/push$COUNTER.txt"  
-    git commit -a -m "$1" &>> "/tmp/push$COUNTER.txt"  
-    git push &>> "/tmp/push$COUNTER.txt"  
-    printf "."
-    )&
-    COUNTER=$((COUNTER+1))  
+    (
+        cd $folder
+        printf " $COUNTER. $folder \n" &>"/tmp/push$COUNTER.txt"
+        printf "."
+        git status &>>"/tmp/push$COUNTER.txt"
+        # if output file contains: nothing to commit, Your branch is up to date
+
+        if grep -q "nothing to commit" "/tmp/push$COUNTER.txt"; then
+            if grep -q "Your branch is up to date" "/tmp/push$COUNTER.txt"; then
+                printf "."
+            else
+                git push &>>"/tmp/push$COUNTER.txt"
+            fi
+        else
+            git add . &>>"/tmp/push$COUNTER.txt"
+            git commit -a -m "$1" &>>"/tmp/push$COUNTER.txt"
+            git push &>>"/tmp/push$COUNTER.txt"
+        fi
+
+        printf "."
+    ) &
+    COUNTER=$((COUNTER + 1))
 done
 wait
 printf "\n"
 cd $cur_dir/
 
 COUNTER=1
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
+for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
     cat "/tmp/push$COUNTER.txt"
     rm -f "/tmp/push$COUNTER.txt"
-    COUNTER=$((COUNTER+1))  
+    COUNTER=$((COUNTER + 1))
 done
 
 cd $cur_dir/
