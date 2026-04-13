@@ -1,6 +1,6 @@
-# r/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_automation_tasks_rs/eset_all_for_backup.sh
+# /d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_CRUSTDE_ContainerizedRustDevEnv/reset_all_for_backup.sh
 
-cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active/github_backup_automation_tasks_rs"
+cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_CRUSTDE_ContainerizedRustDevEnv"
 
 # check if script is run in the right directory
 if [ $PWD != "$cur_dir" ]; then
