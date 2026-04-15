@@ -1,6 +1,9 @@
 # /d/box_original_1/BestiaDev/github_backup_GuitaraokeLeader/push_all_for_backup.sh
 # formatted with v7.2.5 of https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
 
+# Run in git-bash. github.com does not have harsh limits on ssh connections like codeberg.org has.
+# After the migration to codeberg.org, I have just a few repositories on github.com, so I don't need to complicate with parallelism.
+
 cur_dir="/d/box_original_1/BestiaDev/github_backup_GuitaraokeLeader"
 
 # check if script is run in the right directory
@@ -23,7 +26,7 @@ fi
 printf "commit message: $1\n"
 
 printf " \n"
-printf "\033[0;33m    Script to status, add, commit and push the changes to GitHub from \033[0m\n"
+printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
 printf " \n"
@@ -32,42 +35,16 @@ COUNTER=1
 # Loop through hidden and not hidden directories is not trivial
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    # parallelism with ()& confuses the output. I want to print correctly in sequence.
-    (
-        cd $folder
-        printf " $COUNTER. $folder \n" &>"/tmp/push$COUNTER.txt"
-        printf "."
-        git status &>>"/tmp/push$COUNTER.txt"
-        # if output file contains: nothing to commit, Your branch is up to date
-
-        if grep -q "nothing to commit" "/tmp/push$COUNTER.txt"; then
-            if grep -q "Your branch is up to date" "/tmp/push$COUNTER.txt"; then
-                printf "."
-            else
-                git push &>>"/tmp/push$COUNTER.txt"
-            fi
-        else
-            git add . &>>"/tmp/push$COUNTER.txt"
-            git commit -a -m "$1" &>>"/tmp/push$COUNTER.txt"
-            git push &>>"/tmp/push$COUNTER.txt"
-        fi
-
-        printf "."
-    ) &
-    COUNTER=$((COUNTER + 1))
-done
-wait
-printf "\n"
-cd $cur_dir/
-
-COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
-    cat "/tmp/push$COUNTER.txt"
-    rm -f "/tmp/push$COUNTER.txt"
+    cd $folder
+    printf " $COUNTER. $folder \n"
+    git add .
+    git commit -a -m "$1"
+    git push
     COUNTER=$((COUNTER + 1))
 done
 
 cd $cur_dir/
+
 printf "\033[0;33m    Num of repositories should be: 4 \033[0m\n"
 printf " \n"

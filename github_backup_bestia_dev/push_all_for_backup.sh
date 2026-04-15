@@ -1,6 +1,9 @@
 # /d/box_original_1/BestiaDev/github_backup_bestia_dev/push_all_for_backup.sh
 # formatted with v7.2.5 of https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
 
+# Run in git-bash. github.com does not have harsh limits on ssh connections like codeberg.org has.
+# After the migration to codeberg.org, I have just a few repositories on github.com, so I don't need to complicate with parallelism.
+
 cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active"
 
 # check if script is run in the right directory
@@ -23,7 +26,7 @@ fi
 printf "commit message: $1\n"
 
 printf " \n"
-printf "\033[0;33m    Script to status, add, commit and push the changes to GitHub from \033[0m\n"
+printf "\033[0;33m    Script to add, commit and push the changes to GitHub from \033[0m\n"
 printf " $cur_dir \n"
 printf "\033[0;33m    This is used to make small changes to all the projects at once. \033[0m\n"
 printf "\033[0;33m    Num of sub-folders should be: 3 \033[0m\n"
@@ -33,11 +36,11 @@ COUNTER=1
 # Loop through hidden and not hidden directories is not trivial
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
+for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
     cd $folder
     printf "\033[0;33m  $COUNTER. subfolder \033[0m\n"
     pwd
-    COUNTER=$((COUNTER+1))  
+    COUNTER=$((COUNTER + 1))
 
     sh push_all_for_backup.sh "$1"
 done

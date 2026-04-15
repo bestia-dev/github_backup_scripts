@@ -1,4 +1,8 @@
 # /d/box_original_1/BestiaDev/github_backup_bestia_dev/pull_all_for_backup.sh
+# formatted with v7.2.5 of https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format
+
+# Run in git-bash. github.com does not have harsh limits on ssh connections like codeberg.org has.
+# After the migration to codeberg.org, I have just a few repositories on github.com, so I don't need to complicate with parallelism.
 
 cur_dir="/d/box_original_1/BestiaDev/github_backup_bestia_dev/github_backup_active"
 
@@ -8,7 +12,7 @@ if [ $PWD != "$cur_dir" ]; then
   printf "\033[0;33m    Usage: \033[0m\n"
   printf "\033[0;32m cd $cur_dir \033[0m\n"
   printf "\033[0;32m sh pull_all_for_backup.sh \033[0m\n"
-  exit 1;
+  exit 1
 fi
 
 printf " \n"
@@ -22,15 +26,15 @@ COUNTER=1
 # Loop through hidden and not hidden directories is not trivial
 # Warning: the hidden directory must begin with . but we must avoid . and .. special meaning relative directories
 # If the list is empty it returns an error that is than used as a folder name. Pipe the error messages away from the result.
-for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2> /dev/null) ; do
-    cd $folder
-    printf "\n"
-    printf "\033[0;33m  $COUNTER. subfolder \033[0m\n"
-    pwd
-    COUNTER=$((COUNTER+1))  
+for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
+  cd $folder
+  printf "\n"
+  printf "\033[0;33m  $COUNTER. subfolder \033[0m\n"
+  pwd
+  COUNTER=$((COUNTER + 1))
 
-    sh pull_all_for_backup.sh
-    
+  sh pull_all_for_backup.sh
+
 done
 
 printf "\033[0;33m    Num of sub-folders should be: 3 \033[0m\n"
