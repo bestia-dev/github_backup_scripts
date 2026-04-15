@@ -38,9 +38,18 @@ COUNTER=1
 for folder in $(ls -d $cur_dir/.[!.]*/ $cur_dir/*/ 2>/dev/null); do
     cd $folder
     printf " $COUNTER. $folder \n"
-    git add .
-    git commit -a -m "$1"
-    git push
+    git status >"/tmp/push$COUNTER.txt" 2>&1
+    if grep -q 'nothing to commit, working tree clean' "/tmp/push$COUNTER.txt"; then
+        if grep -q 'Your branch is up to date' "/tmp/push$COUNTER.txt"; then
+            printf "Nothing to commit. Up to date. \n"
+        else
+            git push
+        fi
+    else
+        git add .
+        git commit -a -m "$1"
+        git push
+    fi
     COUNTER=$((COUNTER + 1))
 done
 
